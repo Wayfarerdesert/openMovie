@@ -1,36 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie Search App</title>
     <!-- Font-awesome cdn Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="main.css">
-</head>
+    <link rel="stylesheet" href="main.css" />
+  </head>
 
-<body>
+  <body>
     <div class="wrapper">
-        <!-- logo -->
-        <div class="logo">
-            <div class="container">
-                <p><span>open</span>Movie</p>
-            </div>
+      <!-- logo -->
+      <div class="logo">
+        <div class="container">
+          <p><span>open</span>Movie</p>
         </div>
-        <!-- end of logo -->
+      </div>
+      <!-- end of logo -->
 
-        <!-- searchBar -->
-        <div class="search-container">
-            <div class="search-element">
-                <h3>Search Movie:</h3>
-                <input type="text" class="form-control" placeholder="Search Movie by Title ..." id="movie-search-box" onkeyup="findMovies()">
+      <!-- searchBar -->
+      <div class="search-container">
+        <div class="search-element">
+          <h3>Search Movie:</h3>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search Movie by Title ..."
+            id="movie-search-box"
+            onkeyup="findMovies()"
+            onclick="findMovies()"
+          />
 
-                <div class="search-list" id="search-list">
-                    <!-- <div class="search-list-item">
+          <div class="search-list" id="search-list">
+            <!-- <div class="search-list-item">
                         <div class="search-item-thumbnail">
                             <img src="medium-cover.jpg">
                         </div>
@@ -39,16 +49,16 @@
                             <p>2015</p>
                         </div>
                     </div> -->
-                </div>
-            </div>
+          </div>
         </div>
-        <!-- searchBar -->
+      </div>
+      <!-- searchBar -->
 
-        <!-- result container -->
-        <div class="container">
-            <div class="result-container">
-                <div class="result-grid" id="result-grid">
-                    <div class="movie-poster">
+      <!-- result container -->
+      <div class="container">
+        <div class="result-container">
+          <div class="result-grid" id="result-grid">
+            <!-- <div class="movie-poster">
                         <img src="assets/no-image.webp" alt="movie poster">
                     </div>
                     <div class="movie-info">
@@ -64,15 +74,14 @@
                         <p class="plot"><b>Plot: </b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae necessitatibus sit quasi excepturi commodi ipsam accusamus, ut quibusdam, quaerat explicabo maxime numquam ullam voluptates tenetur sed itaque dignissimos dicta dolor.</p>
                         <p class="language"><b>Language: </b>English</p>
                         <p class="awards"><i class="fas fa-award">&nbsp;</i><b>Awards: </b>Nominated for 3 Oscar</p>
-                    </div>
-                </div>
-            </div>
+                    </div> -->
+          </div>
         </div>
-        <!-- result container -->
+      </div>
+      <!-- result container -->
     </div>
 
-        <!-- Custom app js -->
-        <script src="script.js"></script>
-</body>
-
+    <!-- Custom app js -->
+    <script src="script.js"></script>
+  </body>
 </html>
