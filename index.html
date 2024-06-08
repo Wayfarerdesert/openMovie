@@ -27,10 +27,10 @@
         <div class="search-container">
             <div class="search-element">
                 <h3>Search Movie:</h3>
-                <input type="text" class="form-control" placeholder="Search Movie by Title ..." id="movie-search-box">
+                <input type="text" class="form-control" placeholder="Search Movie by Title ..." id="movie-search-box" onkeyup="findMovies()">
 
                 <div class="search-list" id="search-list">
-                    <div class="search-list-item">
+                    <!-- <div class="search-list-item">
                         <div class="search-item-thumbnail">
                             <img src="medium-cover.jpg">
                         </div>
@@ -38,7 +38,7 @@
                             <h3>Interstellar</h3>
                             <p>2015</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="result-container">
                 <div class="result-grid" id="result-grid">
                     <div class="movie-poster">
-                        <img src="medium-cover.jpg" alt="movie poster">
+                        <img src="assets/no-image.webp" alt="movie poster">
                     </div>
                     <div class="movie-info">
                         <h3 class="movie-title">Interstellar</h3>
