@@ -32,6 +32,9 @@ img {
 }
 
 .wrapper .container {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
@@ -49,6 +52,10 @@ img {
 .logo {
     padding: 1rem 0;
     border-bottom: 1px solid var(--light-dark-color);
+}
+
+.logo-img {
+    width: 48px;
 }
 
 .logo p {
@@ -190,7 +197,7 @@ img {
     font-weight: 500;
 }
 
-.movie-info .rating {
+.movie-info .rated {
     background-color: var(--yellow-color);
     padding: .4rem;
     margin: 0 .4rem;
@@ -235,6 +242,117 @@ img {
     margin: 1rem .7rem 0 0;
 }
 
+.movie-info .ratings {
+    display: flex;
+    margin: 1rem auto;
+}
+
+.movie-info .brand {
+    display: flex;
+    align-items: center;
+    width: 16%;
+    margin-right: 2rem;
+    white-space: nowrap;
+}
+
+.movie-info .brand img {
+    width: 28px;
+}
+
+.movie-info .brand p {
+    margin: 0 .3rem;
+    text-align: center;
+}
+
+/*? Search History ====================================================*/
+.search-history {
+    margin: 5rem auto;
+}
+
+.search-history-wrapper {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.search-history-wrapper .title-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-history-wrapper h3 {
+    color: white;
+    font-size: 25px;
+}
+
+.search-history-wrapper .clear-history {
+    color: #ffffff7c;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.history-container {
+    display: flex;
+    justify-content: left;
+    margin: 1rem auto;
+    padding: 2.5rem 0;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.history-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.history-container::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.history-container::-webkit-scrollbar-thumb {
+    background-color: var(--yellow-color);
+    outline: none;
+    border-radius: 10px;
+}
+
+.history-container .movie-poster {
+    width: 150px;
+    height: 222px;
+}
+
+.history-container .movie-poster img {
+    max-width: 150px;
+    border: none;
+}
+
+.movie-thumbnail {
+    margin-right: 2rem;
+    cursor: pointer;
+}
+
+.history-container .movie-info {
+    max-width: 150px;
+}
+
+.movie-thumbnail h4 {
+    padding: 1rem .5rem .3rem .5rem;
+    font-weight: bold;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.movie-thumbnail p {
+    padding: 0 .5rem .3rem .5rem;
+    font-weight: 300;
+}
+
+.movie-thumbnail .movie-info {
+
+    background-color: var(--light-dark-color);
+    border-radius: 0 0 .3rem .3rem;
+}
+
 /*? responsive styles */
 @media(max-width: 450px) {
     .logo p {
@@ -267,6 +385,10 @@ img {
 
     .movie-misc-info li:nth-child(2) {
         margin: .8rem 0;
+    }
+
+    .movie-info .ratings {
+        justify-content: center;
     }
 }
 

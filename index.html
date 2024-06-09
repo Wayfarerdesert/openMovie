@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie Search App</title>
+    <!-- Link to the favicon -->
+    <link rel="icon" type="image/ico" href="./assets/logo.ico" />
     <!-- Font-awesome cdn Icons -->
     <link
       rel="stylesheet"
@@ -14,6 +15,7 @@
     />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="main.css" />
+    <title>Movie Search App</title>
   </head>
 
   <body>
@@ -21,6 +23,7 @@
       <!-- logo -->
       <div class="logo">
         <div class="container">
+          <img src="./assets/logo.webp" alt="logo" class="logo-img" />
           <p><span>open</span>Movie</p>
         </div>
       </div>
@@ -58,27 +61,98 @@
       <div class="container">
         <div class="result-container">
           <div class="result-grid" id="result-grid">
+            <!-- movieDetails -->
             <!-- <div class="movie-poster">
-                        <img src="assets/no-image.webp" alt="movie poster">
-                    </div>
-                    <div class="movie-info">
-                        <h3 class="movie-title">Interstellar</h3>
-                        <ul class="movie-misc-info">
-                            <li class="year"><b>Year: </b>2015</li>
-                            <li class="rating">Rating: PG-13</li>
-                            <li class="released">Released: 05 May 2015</li>
-                        </ul>
-                        <p class="genre"><b>Genre: </b>ScienceFiction, adventure, suspense</p>
-                        <p class="writer"><b>Writer: </b>Some Person</p>
-                        <p class="actors"><b>Actors: </b>Actor One, Actor Two, Actor Three</p>
-                        <p class="plot"><b>Plot: </b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae necessitatibus sit quasi excepturi commodi ipsam accusamus, ut quibusdam, quaerat explicabo maxime numquam ullam voluptates tenetur sed itaque dignissimos dicta dolor.</p>
-                        <p class="language"><b>Language: </b>English</p>
-                        <p class="awards"><i class="fas fa-award">&nbsp;</i><b>Awards: </b>Nominated for 3 Oscar</p>
-                    </div> -->
+              <img src="assets/no-image.webp" alt="movie poster" />
+            </div>
+            <div class="movie-info">
+              <h3 class="movie-title">Interstellar</h3>
+              <ul class="movie-misc-info">
+                <li class="year"><b>Year: </b>2015</li>
+                <li class="rated">Rating: PG-13</li>
+                <li class="released">Released: 05 May 2015</li>
+              </ul>
+              <p class="genre">
+                <b>Genre: </b>ScienceFiction, adventure, suspense
+              </p>
+              <p class="writer"><b>Writer: </b>Some Person</p>
+              <p class="actors">
+                <b>Actors: </b>Actor One, Actor Two, Actor Three
+              </p>
+              <p class="plot">
+                <b>Plot: </b>Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Repudiandae necessitatibus sit quasi excepturi commodi
+                ipsam accusamus, ut quibusdam, quaerat explicabo maxime numquam
+                ullam voluptates tenetur sed itaque dignissimos dicta dolor.
+              </p>
+              <p class="language"><b>Language: </b>English</p>
+              <p class="awards">
+                <i class="fas fa-award">&nbsp;</i><b>Awards: </b>Nominated for 3
+                Oscar
+              </p>
+              <div class="ratings">
+                <div class="brand">
+                  <img src="./assets/ratings/imdb.webp" alt="imdb" />
+                  <p>7.6/10</p>
+                </div>
+                <div class="brand">
+                  <img
+                    src="./assets/ratings/rottentomatoes.webp"
+                    alt="Rotten Tomatoes"
+                  />
+                  <p>85%</p>
+                </div>
+                <div class="brand">
+                  <img
+                    src="./assets/ratings/metacritic.webp"
+                    alt="Metacritic"
+                  />
+                  <p>67/100</p>
+                </div>
+              </div>
+            </div> -->
+            <!-- movieDetails -->
           </div>
         </div>
       </div>
       <!-- result container -->
+
+      <!-- Search History -->
+      <div class="search-history">
+        <div class="search-history-wrapper">
+          <div class="title-container">
+            <h3>Search History</h3>
+            <button class="clear-history" onclick="clearHistory()">
+              Clear History
+            </button>
+          </div>
+
+          <div class="history-container" id="history-container">
+            <!-- search history render -->
+            <!-- <div class="movie-thumbnail">
+              <div class="movie-poster">
+                <img src="assets/no-image.webp" alt="movie poster" />
+              </div>
+              <div class="movie-info">
+                <h4>Pulp Fiction</h4>
+                <p>1994</p>
+              </div>
+            </div>
+
+            <div class="movie-thumbnail">
+              <div class="movie-poster">
+                <img src="assets/no-image.webp" alt="movie poster" />
+              </div>
+              <div class="movie-info">
+                <h4>Interstellar</h4>
+              </div>
+            </div> -->
+            <!-- search history render -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Search History -->
     </div>
 
     <!-- Custom app js -->

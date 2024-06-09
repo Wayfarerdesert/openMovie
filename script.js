@@ -1,6 +1,7 @@
 const movieSearchBox = document.getElementById('movie-search-box');
 const searchList = document.getElementById('search-list');
 const resultGrid = document.getElementById('result-grid');
+const historyContainer = document.getElementById('history-container');
 
 // load movies from API
 async function loadMovies(searchTerm) {
@@ -58,13 +59,27 @@ function loadMovieDetails() {
             const result = await fetch(`https://www.omdbapi.com/?apikey=8502611c&i=${movie.dataset.id}`)
 
             const movieDetails = await result.json();
-            // console.log(movieDetails);
+            console.log(movieDetails);
             displayMovieDetails(movieDetails);
+            searchHistory(movieDetails);
         });
     });
 }
 
 function displayMovieDetails(details) {
+    const ratingSources = [
+        { name: "imdb", img: "./assets/ratings/imdb.webp" },
+        { name: "rottentomatoes", img: "./assets/ratings/rottentomatoes.webp" },
+        { name: "metacritic", img: "./assets/ratings/metacritic.webp" }
+    ];
+
+    let ratingsHTML = ratingSources.map((source, index) => `
+        <div class="brand">
+            <img src="${source.img}" alt="${source.name}" />
+            <p>${details.Ratings?.[index]?.Value ?? 'N/A'}</p>
+        </div>
+    `).join('');
+
     resultGrid.innerHTML = `
         <div class="movie-poster">
             <img src="${(details.Poster != 'N/A') ? details.Poster : './assets/no-image.webp'}" alt="movie poster">
@@ -82,6 +97,9 @@ function displayMovieDetails(details) {
             <p class="plot"><b>Plot: </b>${details.Plot}</p>
             <p class="language"><b>Language: </b>${details.Language}</p>
             <p class="awards"><i class="fas fa-award">&nbsp;</i><b>Awards: </b>${details.Awards}</p>
+            <div class="ratings">
+                ${ratingsHTML}
+            </div>
         </div>
     `;
 };
@@ -91,3 +109,47 @@ window.addEventListener('click', (event) => {
         searchList.classList.add('hide-search-list');
     }
 });
+
+//? Movie Search History
+let searchedMovies = [];
+
+function renderHistory() {
+    historyContainer.innerHTML = searchedMovies.slice().reverse().map(movie => `
+        <div class="movie-thumbnail">
+            <div class="movie-poster">
+            <img src="${movie.poster}" a.movie-info lt="movie poster" />
+            </div>
+            <div class="movie-info">
+                <h4>${movie.title}</h4>
+                <p>${movie.year}</p>
+            </div>
+        </div>
+    `).join('');
+};
+
+if (localStorage.getItem('searchedMovies')) {
+    searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
+    renderHistory();
+}
+
+function searchHistory(details) {
+    // Check if the required details exist and are valid
+    let poster = (details.Poster != 'N/A') ? details.Poster : './assets/no-image.webp'
+    let title = details.Title
+    let year = details.Year
+
+    // Add the movie details to the searchedMovies array
+    if (title !== '' && year !== '') {
+        searchedMovies.push({ poster, title, year });
+        // Save the updated searchedMovies array to localStorage
+        localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
+    }
+    // Render the history
+    renderHistory();
+}
+
+function clearHistory() {
+    localStorage.removeItem('searchedMovies');
+    searchedMovies = [];
+    renderHistory();
+}
