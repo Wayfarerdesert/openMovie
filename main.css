@@ -5,6 +5,7 @@
     --dark-color: #171717;
     --light-dark-color: #292929;
     --yellow-color: #d4aa11;
+    --secondaryInfo: #7c7c7c;
 }
 
 * {
@@ -15,6 +16,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
+    background-color: var(--dark-color);
 }
 
 a {
@@ -191,7 +193,12 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding-bottom: .5rem;
+    color: var(--secondaryInfo);
+}
+
+.movie-misc-info li {
+    padding-right: 2em;
 }
 
 .movie-info .year {
@@ -211,9 +218,9 @@ img {
     opacity: .9;
 }
 
-.movie-info .writer {
-    padding: .5rem;
-    margin: 1rem 0;
+.movie-info p {
+    padding: .3rem;
+    margin: .8rem 0;
 }
 
 .movie-info .genre {
@@ -221,6 +228,7 @@ img {
     display: inline-block;
     padding: .5rem;
     border-radius: 3px;
+    margin: .8rem 0 .5rem 0;
 }
 
 .movie-info .plot {
@@ -240,7 +248,7 @@ img {
 
 .movie-info .awards i {
     color: var(--yellow-color);
-    margin: 1rem .7rem 0 0;
+    margin-right: .2rem;
 }
 
 .movie-info .ratings {
@@ -340,16 +348,17 @@ img {
 }
 
 .movie-thumbnail h4 {
-    padding: 1rem .5rem .3rem .5rem;
+    padding: 1rem .5rem .3rem .8rem;
     font-weight: bold;
-    white-space: normal;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    word-wrap: break-word;
+    word-wrap: normal;
 }
 
 .movie-thumbnail p {
-    padding: 0 .5rem .3rem .5rem;
+    margin: 0;
+    padding: 0 .5rem .5rem .8rem !important;
     font-weight: 300;
 }
 
@@ -446,7 +455,7 @@ img {
         margin-left: 0;
     }
 
-    .movie-info .writer {
+    .movie-info p {
         padding-left: 0;
         margin-left: 0;
     }

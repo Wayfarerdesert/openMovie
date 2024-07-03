@@ -92,23 +92,27 @@ function displayMovieDetails(details) {
         </div>
         <div class="movie-info">
             <h3 class="movie-title">${details.Title}</h3>
+            <p class="genre"><b></b>${details.Genre}</p>
+
             <ul class="movie-misc-info">
-                <li class="year"><b>Year: </b>${details.Year}</li>
-                <li class="rating">Rating: ${details.Rated}</li>
-                <li class="released">Released: ${details.Released}</li>
+                <li class="year">${details.Year}</li>
+                <li class="rating">${details.Rated}</li>
+                <li class="runtime">${details.Runtime}</li>
             </ul>
-            <p class="genre"><b>Genre: </b>${details.Genre}</p>
+
+            <p class="director"><b>Director: </b>${details.Director}</p>
             <p class="writer"><b>Writer: </b>${details.Writer}</p>
             <p class="actors"><b>Actors: </b>${details.Actors}</p>
             <p class="plot"><b>Plot: </b>${details.Plot}</p>
             <p class="language"><b>Language: </b>${details.Language}</p>
-            <p class="awards"><i class="fas fa-award">&nbsp;</i><b>Awards: </b>${details.Awards}</p>
+            <p class="awards"><b>Awards <i class="fas fa-award"></i>: </b>${details.Awards}</p>
+            <p class="released">Released: ${details.Released}</p>
             <div class="ratings">
                 ${ratingsHTML}
             </div>
         </div>
     `;
-    console.log('movie details rendered')
+    console.log('Movie details rendered')
 };
 
 window.addEventListener('click', (event) => {
@@ -125,7 +129,7 @@ function renderHistory() {
         <div class="movie-thumbnail" data-movie-id="${movie.movieId}">
             <div class="delete-movie" data-movie-id="${movie.movieId}">X</div>
             <div class="movie-poster">
-                <img src="${movie.poster}" a.movie-info alt="movie poster" />
+                <img src="${movie.poster}" alt="movie poster" />
             </div>
             <div class="movie-info">
                 <h4>${movie.title}</h4>
@@ -172,15 +176,36 @@ function deleteMovie(movieID) {
     renderHistory();
 }
 
+function rearrangeSearchHistory(movieID) {
+    const movieIndex = searchedMovies.findIndex(movie => movie.movieId === movieID);
+    if (movieIndex !== -1) {
+        const [movie] = searchedMovies.splice(movieIndex, 1); // Remove the movie from its current position
+        searchedMovies.push(movie); // Add the movie to the beginning of the array
+        localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
+        renderHistory();
+    }
+}
+
 // Event listener for clicks on delete buttons
-window.addEventListener('click', (event) => {
+window.addEventListener('click', async (event) => {
     if (event.target.classList.contains('delete-movie')) {
         const movieID = event.target.getAttribute('data-movie-id');
-        console.log('Deleting movieID:', movieID);
+        // console.log('Deleting movieID:', movieID);
         deleteMovie(movieID);
     }
+
+    if (event.target.closest('.movie-thumbnail')) {
+        const movieThumbnail = event.target.closest('.movie-thumbnail');
+        const movieID = movieThumbnail.getAttribute('data-movie-id');
+        console.log('Fetching movieID:', movieID);
+        rearrangeSearchHistory(movieID)
+        const result = await fetch(`https://www.omdbapi.com/?apikey=8502611c&i=${movieID}`);
+        const movieDetails = await result.json();
+        displayMovieDetails(movieDetails);
+    }
+
     if (localStorage.getItem('searchedMovies')) {
         searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
-        console.log('Updated localStorage searchedMovies:', searchedMovies);
+        // console.log('Updated localStorage searchedMovies:', searchedMovies);
     }
 });
