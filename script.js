@@ -2,6 +2,7 @@ const movieSearchBox = document.getElementById('movie-search-box');
 const searchList = document.getElementById('search-list');
 const resultGrid = document.getElementById('result-grid');
 const historyContainer = document.getElementById('history-container');
+const movieDetailsContainer = document.querySelector('.movieDetails');
 // https://www.omdbapi.com/?t=spiderman&y=2007&apikey=8502611c
 
 function reloadPage() {
@@ -22,9 +23,11 @@ async function loadMovies(searchTerm) {
 function findMovies() {
     let searchTerm = (movieSearchBox.value).trim();
     if (searchTerm.length > 0) {
+        movieDetailsContainer.classList.add('blurred');
         searchList.classList.remove('hide-search-list');
         loadMovies(searchTerm);
     } else {
+        movieDetailsContainer.classList.remove('blurred');
         searchList.classList.add('hide-search-list');
     }
 }
@@ -65,6 +68,7 @@ function loadMovieDetails() {
 
             const movieDetails = await result.json();
             // console.log(movieDetails);
+            movieDetailsContainer.classList.remove('blurred');
             displayMovieDetails(movieDetails);
             searchHistory(movieDetails);
             console.log('movie details loaded')

@@ -11,8 +11,9 @@ This web application allows users to search for movies using the OMDB API and di
 - **Delete Functionality**: Allows users to delete movies from the search history.
 - **Reorder History**: Clicking on a movie thumbnail reorders it to the last position in the history list.
 
-![screenshot](./assets/screenshots/13-37.png)
-![screenshot](./assets/screenshots/13-38.png)
+![search bar](./assets/screenshots/0.png)
+![main screen](./assets/screenshots/1.png)
+![search history](./assets/screenshots/2.png)
 
 ## Getting Started
 
