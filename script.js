@@ -2,6 +2,11 @@ const movieSearchBox = document.getElementById('movie-search-box');
 const searchList = document.getElementById('search-list');
 const resultGrid = document.getElementById('result-grid');
 const historyContainer = document.getElementById('history-container');
+// https://www.omdbapi.com/?t=spiderman&y=2007&apikey=8502611c
+
+function reloadPage() {
+    location.reload(); // Reloads the page
+}
 
 // load movies from API
 async function loadMovies(searchTerm) {
@@ -59,9 +64,10 @@ function loadMovieDetails() {
             const result = await fetch(`https://www.omdbapi.com/?apikey=8502611c&i=${movie.dataset.id}`)
 
             const movieDetails = await result.json();
-            console.log(movieDetails);
+            // console.log(movieDetails);
             displayMovieDetails(movieDetails);
             searchHistory(movieDetails);
+            console.log('movie details loaded')
         });
     });
 }
@@ -102,6 +108,7 @@ function displayMovieDetails(details) {
             </div>
         </div>
     `;
+    console.log('movie details rendered')
 };
 
 window.addEventListener('click', (event) => {
@@ -115,9 +122,10 @@ let searchedMovies = [];
 
 function renderHistory() {
     historyContainer.innerHTML = searchedMovies.slice().reverse().map(movie => `
-        <div class="movie-thumbnail">
+        <div class="movie-thumbnail" data-movie-id="${movie.movieId}">
+            <div class="delete-movie" data-movie-id="${movie.movieId}">X</div>
             <div class="movie-poster">
-            <img src="${movie.poster}" a.movie-info lt="movie poster" />
+                <img src="${movie.poster}" a.movie-info alt="movie poster" />
             </div>
             <div class="movie-info">
                 <h4>${movie.title}</h4>
@@ -134,13 +142,14 @@ if (localStorage.getItem('searchedMovies')) {
 
 function searchHistory(details) {
     // Check if the required details exist and are valid
+    let movieId = details.imdbID
     let poster = (details.Poster != 'N/A') ? details.Poster : './assets/no-image.webp'
     let title = details.Title
     let year = details.Year
 
     // Add the movie details to the searchedMovies array
     if (title !== '' && year !== '') {
-        searchedMovies.push({ poster, title, year });
+        searchedMovies.push({ movieId, poster, title, year });
         // Save the updated searchedMovies array to localStorage
         localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
     }
@@ -153,3 +162,25 @@ function clearHistory() {
     searchedMovies = [];
     renderHistory();
 }
+
+// Function to delete a specific movie from History
+function deleteMovie(movieID) {
+    console.log('Deleting movie with ID:', movieID);
+    searchedMovies = searchedMovies.filter(movie => movie.movieId !== movieID);
+    console.log('Updated searchedMovies:', searchedMovies);
+    localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies));
+    renderHistory();
+}
+
+// Event listener for clicks on delete buttons
+window.addEventListener('click', (event) => {
+    if (event.target.classList.contains('delete-movie')) {
+        const movieID = event.target.getAttribute('data-movie-id');
+        console.log('Deleting movieID:', movieID);
+        deleteMovie(movieID);
+    }
+    if (localStorage.getItem('searchedMovies')) {
+        searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
+        console.log('Updated localStorage searchedMovies:', searchedMovies);
+    }
+});
