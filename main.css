@@ -5,6 +5,7 @@
     --dark-color: #171717;
     --light-dark-color: #292929;
     --yellow-color: #d4aa11;
+    --darker-yellow-color: #b6910c;
     --secondaryInfo: #7c7c7c;
 }
 
@@ -34,7 +35,9 @@ img {
 
 .wrapper {
     min-height: 100vh;
-    background-color: var(--dark-color);
+    /* background-color: var(--dark-color); */
+    background: rgb(22,22,22);
+    background: linear-gradient(90deg, rgba(22,22,22,1) 20%, rgba(27,26,26,1) 35%, rgba(42,42,42,1) 50%, rgba(27,26,26,1) 65%, rgba(22,22,22,1) 80%);
 }
 
 /*? Search Container =====================================*/
@@ -179,6 +182,21 @@ img {
     padding: 4rem 0;
 }
 
+.result-container .add-remove {
+    background-color: var(--yellow-color);
+    position: absolute;
+    padding: 0.7rem 0.9rem;
+    left: 15.2rem;
+    /* top: 1.9rem; */
+    /* transform: translateY(-50%); */
+    transition: opacity 0.3s ease;
+}
+
+.result-container .add-remove:hover {
+    background-color: var(--darker-yellow-color);
+    cursor: pointer;
+}
+
 .movie-poster img {
     max-width: 300px;
     margin: 0 auto;
@@ -280,6 +298,157 @@ img {
 .movie-info .brand p {
     margin: 0 .3rem;
     text-align: center;
+}
+
+/*? Watchlist Section ====================================================*/
+.watchlist {
+    margin: 5rem auto;
+}
+
+.watchlist-wrapper {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.watchlist-wrapper .title-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.watchlist-wrapper h3 {
+    color: white;
+    font-size: 25px;
+}
+
+.watchlist-wrapper p {
+    color: white;
+    font-size: 15px;
+    margin-top: 1rem;
+}
+
+.watchlist-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin: 1rem auto;
+    padding: 2rem .8rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    border: solid 1px var(--secondaryInfo);
+    border-radius: .5rem;
+}
+
+.watchlist-container .movie-misc-info li {
+    padding-right: 0;
+    padding-left: 2.2em;
+}
+
+.watchlist-container .movie-poster {
+    width: 150px;
+    height: 222px;
+    cursor: pointer;
+}
+
+.watchlist-container .movie-poster img {
+    max-width: 130px;
+    border: none;
+    border-radius: 0 1rem 1rem 1rem;
+}
+
+.watchlist-container .movie-thumbnail {
+    width: 100%;
+    margin: .5rem 0;
+    padding: 1rem 0;
+    cursor: auto;
+    /* position: relative; */
+    border-bottom: solid 1px var(--secondaryInfo);
+}
+
+.watchlist-container .info-title-wrapper {
+    display: flex;
+    max-height: 180px;
+}
+
+.watchlist-container .movie-info {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent !important;
+    padding: 1rem .5rem .3rem .8rem;
+}
+
+.watchlist-container .movie-title-wrapper {
+    display: flex;
+    flex-direction: row;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.watchlist-container .counter {
+    padding-right: 1rem;
+}
+
+.watchlist-container h4 {
+    padding: 0 !important;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+}
+
+.watchlist .movie-thumbnail p {
+    margin: 0;
+    padding: 0 .5rem .5rem .8rem !important;
+    font-weight: 300;
+}
+
+.watchlist .movie-thumbnail .movie-info {
+
+    background-color: var(--light-dark-color);
+    border-radius: 0 0 .3rem .3rem;
+}
+
+.watchlist-container .add-remove {
+    background-color: var(--yellow-color);
+    position: absolute;
+    padding: 0.3rem 0.5rem;
+    left: .7rem;
+    top: 1.9rem;
+    transform: translateY(-50%);
+    /* opacity: 0; */
+    transition: opacity 0.3s ease;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.watchlist-container .add-remove:hover {
+    background-color: var(--darker-yellow-color);
+}
+
+.watchlist-container .plot {
+    min-height: 70px;
+    max-height: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+}
+
+.watchlist-container .movie-info-extended p {
+    padding: 0 .8rem !important;
+
+}
+
+.watchlist-container .people {
+    display: flex;
+    flex-direction: row;
+    padding-top: 1rem;
+}
+
+.watchlist-container .people b{
+    font-weight: bold;
 }
 
 /*? Search History ====================================================*/

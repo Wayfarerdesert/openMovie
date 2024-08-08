@@ -92,6 +92,7 @@ function displayMovieDetails(details) {
 
     resultGrid.innerHTML = `
         <div class="movie-poster">
+            <div class="add-remove">✓</div>
             <img src="${(details.Poster != 'N/A') ? details.Poster : './assets/no-image.webp'}" alt="movie poster">
         </div>
         <div class="movie-info">
