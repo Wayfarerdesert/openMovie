@@ -1,6 +1,7 @@
 const movieSearchBox = document.getElementById('movie-search-box');
 const searchList = document.getElementById('search-list');
 const resultGrid = document.getElementById('result-grid');
+const watchlistContainer = document.getElementById('watchlist-container')
 const historyContainer = document.getElementById('history-container');
 const movieDetailsContainer = document.querySelector('.movieDetails');
 // https://www.omdbapi.com/?t=spiderman&y=2007&apikey=8502611c
@@ -90,9 +91,16 @@ function displayMovieDetails(details) {
         </div>
     `).join('');
 
+    // Check if the movie is already in the watchlist
+    const isInWatchlist = userWatchlist.some(movie => movie.movieId === details.imdbID);
+
+    const watchlistButtonHTML = isInWatchlist
+        ? `<div class="removefromWtchList" id="watchlist-button"><i class="fa-solid fa-check"></i></div>`
+        : `<div class="addToWtchList" id="watchlist-button"><i class="fa-solid fa-plus"></i></div>`;
+
     resultGrid.innerHTML = `
         <div class="movie-poster">
-            <div class="add-remove">✓</div>
+            ${watchlistButtonHTML}
             <img src="${(details.Poster != 'N/A') ? details.Poster : './assets/no-image.webp'}" alt="movie poster">
         </div>
         <div class="movie-info">
@@ -118,6 +126,8 @@ function displayMovieDetails(details) {
         </div>
     `;
     console.log('Movie details rendered')
+
+    addMovieToWatchlist(details)
 };
 
 window.addEventListener('click', (event) => {
@@ -126,14 +136,119 @@ window.addEventListener('click', (event) => {
     }
 });
 
-//? Movie Search History
+//? Movies WatchList ========================================================================
+let userWatchlist = []
+
+function saveWatchlist() {
+    localStorage.setItem('userWatchlist', JSON.stringify(userWatchlist));
+}
+
+function addMovieToWatchlist(details) {
+    const watchlistButton = document.getElementById('watchlist-button');
+
+    watchlistButton.addEventListener('click', () => {
+        const isInWatchlist = userWatchlist.some(movie => movie.movieId === details.imdbID);
+
+        if (isInWatchlist) {
+            // Remove movie from the watchlist
+            userWatchlist = userWatchlist.filter(movie => movie.movieId !== details.imdbID);
+            console.log('Removed from watchlist:', details.Title);
+            watchlistButton.innerHTML = `<i class="addToWtchList fa-solid fa-plus"></i>`;
+        } else {
+            // Add movie to the watchlist
+            const movie = {
+                movieId: details.imdbID,
+                title: details.Title,
+                poster: details.Poster,
+                year: details.Year,
+                runtime: details.Runtime,
+                plot: details.Plot,
+                director: details.Director,
+                actors: details.Actors
+            };
+            userWatchlist.push(movie);
+            console.log('Added to watchlist:', details.Title);
+            watchlistButton.innerHTML = `<i class="removefromWtchList fa-solid fa-check"></i>`;
+        }
+
+        // Save to localStorage and update the displayed watchlist
+        saveWatchlist();
+        renderWatchlist();
+    });
+}
+
+function deleteFromWatchList(movieId) {
+    userWatchlist = userWatchlist.filter(movie => movie.movieId !== movieId);
+    console.log('Removed movie with ID:', movieId);
+
+    // Update localStorage and re-render the watchlist
+    saveWatchlist();
+    renderWatchlist();
+}
+
+
+function renderWatchlist() {
+    watchlistContainer.innerHTML = userWatchlist.map((movie, index) => `
+        <div class="movie-thumbnail" data-movie-id="${movie.movieId}">
+            <div class="info-title-wrapper">
+                <div class="movie-poster">
+                    <div class="removefromWtchList" id="removeButton-${movie.movieId}">
+                        <i class="fa-solid fa-check"></i></div>
+                    <img src="${movie.poster}" alt="movie poster" />
+                </div>
+                <div class="movie-info">
+                    <div class="movie-title-wrapper">
+                        <div class="counter">${index + 1}.</div>
+                        <h4>${movie.title}</h4>
+                    </div>
+                    <ul class="movie-misc-info">
+                        <li class="year">${movie.year}</li>
+                        <li class="runtime">${movie.runtime}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="movie-info-extended">
+                <p class="plot">${movie.plot}</p>
+                <div class="people">
+                    <p class="director"><b>Director: </b>${movie.director}</p>
+                    <p class="actors"><b>Actors: </b>${movie.actors}</p>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    // Update the counter element with the number of titles in the watchlist
+    const counterElement = document.querySelector('.counter p');
+    counterElement.textContent = `${userWatchlist.length} title${userWatchlist.length !== 1 ? 's' : ''}`;
+
+    document.addEventListener('click', (event) => {
+        if (event.target.classList.contains('removefromWtchList')) {
+            const movieId = event.target.closest('.movie-thumbnail').getAttribute('data-movie-id');
+            if (movieId) {
+                deleteFromWatchList(movieId);
+            }
+        }
+    });
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const storedWatchlist = localStorage.getItem('userWatchlist');
+    if (storedWatchlist) {
+        userWatchlist = JSON.parse(storedWatchlist);
+        renderWatchlist();
+    }
+});
+
+//? Movies WatchList ENDs
+
+//? Movie Search History ========================================================================
 let searchedMovies = [];
 
 function renderHistory() {
     historyContainer.innerHTML = searchedMovies.slice().reverse().map(movie => `
         <div class="movie-thumbnail" data-movie-id="${movie.movieId}">
             <div class="delete-movie" data-movie-id="${movie.movieId}">X</div>
-            <div class="movie-poster">
+            <div class="movie-poster-history">
                 <img src="${movie.poster}" alt="movie poster" />
             </div>
             <div class="movie-info">
@@ -214,3 +329,4 @@ window.addEventListener('click', async (event) => {
         // console.log('Updated localStorage searchedMovies:', searchedMovies);
     }
 });
+//? Movie Search History ENDs
