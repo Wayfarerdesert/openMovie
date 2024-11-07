@@ -228,7 +228,8 @@ img {
     cursor: pointer;
 }
 
-.movie-poster img {
+.movieDetails .movie-poster img {
+    min-height: 450px;
     max-width: 300px;
     margin: 0 auto 0 0;
     border: 4px solid #fff;
@@ -370,8 +371,7 @@ img {
 }
 
 .watchlist-container .movie-misc-info li {
-    padding-right: 0;
-    padding-left: 2.2em;
+    padding-right: 2rem;
 }
 
 .watchlist-container .movie-thumbnail {
@@ -379,7 +379,6 @@ img {
     margin: .5rem 0;
     padding: 1rem 0;
     cursor: auto;
-    /* position: relative; */
     border-bottom: solid 1px var(--secondaryInfo);
 }
 
@@ -395,6 +394,7 @@ img {
     width: 150px;
     height: 222px;
     cursor: pointer;
+    margin-left: .5rem;
 }
 
 .watchlist-container .movie-poster img {
@@ -407,7 +407,7 @@ img {
     display: flex;
     flex-direction: column;
     background-color: transparent !important;
-    padding: 1rem .5rem .3rem .8rem;
+    padding: 2rem .5rem .3rem .8rem;
 }
 
 .watchlist-container .movie-title-wrapper {
@@ -473,6 +473,20 @@ img {
     background-color: var(--secondaryInfo);
 }
 
+.watchlist-container .movie-misc-info {
+    padding-top: 1rem;
+}
+
+.watchlist-container .movieRating {
+    color: var(--yellow-color);
+    padding-top: 1rem;
+    display: flex;
+}
+
+.watchlist-container .movie-info-extended {
+    margin-top: 2rem;
+}
+
 .watchlist-container .plot {
     min-height: 70px;
     max-height: 140px;
@@ -487,7 +501,6 @@ img {
 
 .watchlist-container .movie-info-extended p {
     padding: 0 .8rem !important;
-
 }
 
 .watchlist-container .people {
@@ -641,12 +654,39 @@ img {
         width: 100%;
     }
 
-    .movie-misc-info {
-        flex-direction: column;
+    .watchlist-wrapper {
+        width: 90%;
     }
 
-    .movie-misc-info li:nth-child(2) {
-        margin: .8rem 0;
+    .watchlist-container .movie-info {
+        padding: .5rem .3rem .3rem .5rem;
+    }
+
+    .watchlist-container .counter {
+        padding-right: .2rem;
+        font-size: 22px;
+    }
+
+    .watchlist-container h4 {
+        font-size: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: horizontal;
+        white-space: normal;
+    }
+
+    .watchlist-container .people {
+        flex-direction: column;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        white-space: normal;
     }
 
     .search-history-wrapper {

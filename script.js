@@ -162,6 +162,8 @@ function addMovieToWatchlist(details) {
                 poster: details.Poster,
                 year: details.Year,
                 runtime: details.Runtime,
+                rated: details.Rated,
+                rating: details.Ratings,
                 plot: details.Plot,
                 director: details.Director,
                 actors: details.Actors
@@ -204,7 +206,12 @@ function renderWatchlist() {
                     <ul class="movie-misc-info">
                         <li class="year">${movie.year}</li>
                         <li class="runtime">${movie.runtime}</li>
+                        <li class="runtime">${movie.rated}</li>
                     </ul>
+                    <div class="movieRating">
+                        <i class="fa-solid fa-star"></i>
+                        <p>${movie.rating?.[0]?.Value.split("/")[0] ?? '0.0'}</p>
+                    </div>
                 </div>
             </div>
             <div class="movie-info-extended">
