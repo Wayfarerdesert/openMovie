@@ -42,30 +42,37 @@ To run the application locally, follow these steps:
 
 ## Functionality
 
-### Search History
-
-- **Storage**: Movies searched by the user are stored locally using `localStorage`.
-- **Display**: Each movie in the history includes its title, year and poster.
-- **Rendering**: The search history is rendered dynamically in the UI using JavaScript.
-
 ### Movie Details
 
 - **Fetching**: Clicking on a movie thumbnail fetches detailed information about the movie from the OMDB API.
 - **Display**: Details displayed include movie poster, title, year, rating, release date, genre, plot, language, and awards.
 - **API**: Uses the OMDB API (`https://www.omdbapi.com/`) for retrieving movie data based on IMDb IDs.
 
+### Watchlist
+
+- **Add to Watchlist**: Users can add movies to a personal watchlist by clicking a button in the movie details section.
+- **Remove from Watchlist**: Movies can be removed from the watchlist using the same button.
+- **Persistent Storage**: The watchlist is saved locally using `localStorage` to ensure movies persist across sessions.
+- **Display**: The watchlist dynamically renders all added movies, showing their title, poster, and details like release year and runtime.
+
+### Search History
+
+- **Storage**: Movies searched by the user are stored locally using `localStorage`.
+- **Display**: Each movie in the history includes its title, year and poster.
+- **Rendering**: The search history is rendered dynamically in the UI using JavaScript.
+
 ### Delete Functionality
 
 - **Interaction**: Users can delete movies from the search history by clicking the delete button (`X`) on each movie thumbnail.
 - **Action**: Deleted movies are removed from both the UI and local storage (`localStorage`).
 
-### Technologies Used
+## Technologies Used
 
 - **Frontend**: HTML, CSS, JavaScript
 - **API Integration**: Fetch API for making requests to the OMDB API
 - **Data Storage**: `localStorage` for storing and retrieving search history locally in the browser
 
-### Acknowledgments
+## Acknowledgments
 
 - **OMDB API**: Provides movie data for this project.
 - **FontAwesome**: Used for icons, such as the delete button icon.
